@@ -41,19 +41,29 @@ const iTetromino = [
     [width, width+1, width+2, width+3]
 ]
 
-const theTetrominoes = [lTetromino, zTetramino, oTetramino, tTetramino, iTetramino]
+const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
 let currentPosition = 4
-let current = theTetrominoes[0][0]
+let currentRotation = 0
 
-// draw the first rotation in the first tetromino
+console.log(theTetrominoes[0][0])
+
+//randomly select a tetromino and its first rotation
+let random = Math.floor(Math.random()*theTetrominoes.length)
+let current = theTetrominoes[random][currentRotation]
+
+// draw the tetromino
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino')
     })
 }
 
-draw()
+function undraw() {
+    current.forEach(index => {
+        squares[currentPosition + index].classList.remove('tetromino')
+    })
+}
 
 
 
