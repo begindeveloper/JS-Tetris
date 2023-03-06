@@ -56,6 +56,7 @@ let current = theTetrominoes[random][currentRotation]
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino')
+        draw()
     })
 }
 
@@ -63,14 +64,30 @@ function draw() {
  function undraw() {
     current.forEach(index => {
       squares[currentPosition + index].classList.remove('tetromino')
-
+      draw()
     })
   }
 
-// time and intervals
+// make the teromino move down every second
+timerId = setInterval(moveDown, 1000)
 
+// move down function
+function moveDown() {
+    undraw()
+    currentPosition += width
+    draw()
+}
 
-
+//freeze function
+function freeze() {
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+        current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+        //start a new tetromino falling
+        random = math.floor(Math.random() * theTetrominoes.length)
+        current = theTetrominoes[random][currentRotation]
+        currentPosition = 4
+    }
+}
 
 
 
