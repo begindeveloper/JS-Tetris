@@ -156,7 +156,21 @@ function isAtLeft() {
     return current.some(index => (currentPosition + index) % width === 0)
 }
 
-
+function checkRotatedPosition(R) {
+    R = R || currentPosition //get the current position. Check if it is near the left side
+    if ((R+1) % width < 4) { //add a 1 because the position index can be 1 less than where the piece is 
+        if (isAtRight()) { // use actual position to check if it's flipped over to right side
+            currentPosition += 1 // add one to wrap it back around
+            checkRotatedPosition(R) // check again
+        }
+    }
+    else if (P % width > 5) {
+        if (isAtLeft()){
+          currentPosition -= 1
+        checkRotatedPosition(R)
+        }
+      }
+}
 
 
 //rotate the tetromino
@@ -167,6 +181,7 @@ function rotate() {
         currentRotation = 0
     }
     current = theTetrominoes[random][currentRotation] 
+    checkRotatedPosition()
     draw()
 }
 
@@ -242,16 +257,5 @@ function gameOver() { //if some of the indexes at the current tetrominoes postio
        clearInterval(timerId) 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 })
