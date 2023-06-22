@@ -93,7 +93,7 @@ function control(e) {
         moveDown()
     }
 }
-document.addEventListener('keyup', control)
+document.addEventListener('keydown', control);
 
 
 // move down function
@@ -202,19 +202,24 @@ const upNextTetrominoes = [
 ]
 
 
-//display the shape in the mini-grid display
+// display the shape in the mini-grid display
 function displayShape() {
-    //remove any trace of tetromino from the entire grid
-    displaySquares.forEach(square => {
-        square.classList.remove('tetromino')
-        square.style.backgroundColor = ''
-    })
-    upNextTetrominoes[nextRandom].forEach(index => {
-        displaySquares[displayIndex + index].classList.add('tetromino')
-        displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom]
-    })
-}
-
+    // remove any trace of tetromino from the entire grid
+    displaySquares.forEach((square) => {
+      square.classList.remove('tetromino');
+      square.style.backgroundColor = '';
+    });
+  
+    // get the shape of the next tetromino
+    const shape = upNextTetrominoes[nextRandom];
+  
+    // add tetromino class and color to the display squares
+    shape.forEach((index) => {
+      displaySquares[displayIndex + index].classList.add('tetromino');
+      displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom];
+    });
+  }
+  
 
 //add functionality to the button
 startBtn.addEventListener('click', () => {
