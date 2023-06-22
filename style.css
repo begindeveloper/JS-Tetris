@@ -7,12 +7,13 @@
     height: 600px;
     display: flex;
     flex-wrap: wrap;
-    background-color: rosybrown;
+    background-color: lavender;
 }
 
 .grid div {
    height: 40px; 
    width: 40px;
+
 }
 
 .tetromino {
@@ -31,4 +32,20 @@
 .mini-grid div {
     height: 20px;
     width: 20px;
+}
+
+h3{
+    text-align: left;
+    align-self: center;
+    font-size: xx-large;
+}
+
+.score{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.start-button {
+    font-size: 24px;
+    padding: 10px 20px;
 }

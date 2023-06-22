@@ -157,19 +157,20 @@ function isAtLeft() {
 }
 
 function checkRotatedPosition(R) {
-    R = R || currentPosition //get the current position. Check if it is near the left side
-    if ((R+1) % width < 4) { //add a 1 because the position index can be 1 less than where the piece is 
-        if (isAtRight()) { // use actual position to check if it's flipped over to right side
-            currentPosition += 1 // add one to wrap it back around
-            checkRotatedPosition(R) // check again
+    R = R || currentPosition; //get the current position. Check if it is near the left side
+    if ((R + 1) % width < 4) {
+        //add a 1 because the position index can be 1 less than where the piece is
+        if (isAtRight()) {
+            // use actual position to check if it's flipped over to the right side
+            currentPosition += 1; // add one to wrap it back around
+            checkRotatedPosition(R); // check again
+        }
+    } else if (R % width > 5) {
+        if (isAtLeft()) {
+            currentPosition -= 1;
+            checkRotatedPosition(R);
         }
     }
-    else if (P % width > 5) {
-        if (isAtLeft()){
-          currentPosition -= 1
-        checkRotatedPosition(R)
-        }
-      }
 }
 
 
@@ -217,16 +218,16 @@ function displayShape() {
 
 //add functionality to the button
 startBtn.addEventListener('click', () => {
-    if(timerId) {
-        cleanInterval(timerId)
-        timerId = null
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
     } else {
-        draw()
-        timerId = setInterval(moveDown, 1000)
-        nextRandom = Math.floor(Math.random()*theTetrominoes.length)
-        displayShape()
+        draw();
+        timerId = setInterval(moveDown, 1000);
+        nextRandom = Math.floor(Math.random() * theTetrominoes.length);
+        displayShape();
     }
-})
+});
 
 
 //add score
@@ -252,10 +253,10 @@ function addScore() {
 
 //game over 
 function gameOver() { //if some of the indexes at the current tetrominoes postion at its current location, call it gameover
-    if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-       scoreDisplay.innerHTML = 'end'
-       clearInterval(timerId) 
+    if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        scoreDisplay.innerHTML = 'end';
+        clearInterval(timerId);
     }
 }
 
-})
+});
